@@ -5,6 +5,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 use UrbanEtter\Hoi\HoiApplication;
 
+
 $application = new HoiApplication('Hoi', '0.1-dev');
-$application->registerSteps();
+$application->registerSteps(__DIR__.'/../hoi.json');
 $application->run();

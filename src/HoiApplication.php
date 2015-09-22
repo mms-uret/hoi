@@ -7,9 +7,8 @@ use Symfony\Component\Console\Application;
 
 class HoiApplication extends Application
 {
-    public function registerSteps()
+    public function registerSteps($path)
     {
-        $path = __DIR__ . '/../hoi.json';
         $steps = file_get_contents($path);
         $steps = json_decode($steps, true);
 
