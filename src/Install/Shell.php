@@ -13,6 +13,6 @@ class Shell implements InstallInterface
             throw new \InvalidArgumentException('Install type "shell" needs a "command"');
         }
         $cmd = escapeshellcmd($config["command"]);
-        shell_exec($cmd);
+        return shell_exec($cmd);
     }
 }

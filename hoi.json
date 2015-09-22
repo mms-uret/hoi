@@ -9,5 +9,11 @@
     "check": "not homebrew.installed('brew-cask')",
     "description": "Installs homebrew cask, which allows to install os x applications",
     "command": "brew install caskroom/cask/brew-cask"
+  },
+  "wget": {
+    "required": ["homebrew"],
+    "check": "not homebrew.installed('wget')",
+    "description": "Installs wget",
+    "command": "brew install wget"
   }
 }

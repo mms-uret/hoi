@@ -65,7 +65,7 @@ class Step extends Command
             $result = $expressionLanguage->evaluate($this->config['check'], $checks);
 
             if (!$result) {
-                $output->writeln($this->getName() . ' is already installed');
+                $output->writeln("<info>" . $this->getName() . "</info> is already installed");
                 return;
             }
         }
@@ -78,6 +78,8 @@ class Step extends Command
         if (!isset($types[$typeName])) {
             throw new \InvalidArgumentException("Install type $typeName unknown");
         }
+
+        $output->writeln("Installing <info>" . $this->getName() . "</info>");
 
         /** @var InstallInterface $type */
         $type = $types[$typeName];
