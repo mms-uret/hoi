@@ -1,0 +1,13 @@
+{
+  "homebrew": {
+    "check": "not executable.exists('brew')",
+    "description": "Installs homebrew, the missing package manager for OS X",
+    "command": "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+  },
+  "cask": {
+    "required": ["homebrew"],
+    "check": "not homebrew.installed('brew-cask')",
+    "description": "Installs homebrew cask, which allows to install os x applications",
+    "command": "brew install caskroom/cask/brew-cask"
+  }
+}
