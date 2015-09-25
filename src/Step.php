@@ -8,7 +8,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use UrbanEtter\Hoi\Check\Executable;
+use UrbanEtter\Hoi\Check\File;
 use UrbanEtter\Hoi\Check\Homebrew;
+use UrbanEtter\Hoi\Install\FileManipulation;
 use UrbanEtter\Hoi\Install\Shell;
 
 class Step extends Command
@@ -61,10 +63,11 @@ class Step extends Command
             $checks = [
                 "executable" => new Executable(),
                 "homebrew" => new Homebrew(),
+                "file" => new File($this->config),
             ];
             $result = $expressionLanguage->evaluate($this->config['check'], $checks);
 
-            if (!$result) {
+            if ($result) {
                 $output->writeln("<info>" . $this->getName() . "</info> is already installed");
                 return;
             }
@@ -72,8 +75,9 @@ class Step extends Command
 
         $types = [
             "shell" => new Shell(),
+            "file-manipulation" => new FileManipulation(),
         ];
-        $typeName = (isset($this->config['type'])) ? isset($this->config['type']) : 'shell';
+        $typeName = (isset($this->config['type'])) ? $this->config['type'] : 'shell';
 
         if (!isset($types[$typeName])) {
             throw new \InvalidArgumentException("Install type $typeName unknown");

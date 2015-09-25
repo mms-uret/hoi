@@ -1,19 +1,26 @@
 {
   "homebrew": {
-    "check": "not executable.exists('brew')",
+    "check": "executable.exists('brew')",
     "description": "Installs homebrew, the missing package manager for OS X",
     "command": "ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
   },
   "cask": {
     "required": ["homebrew"],
-    "check": "not homebrew.installed('brew-cask')",
+    "check": "homebrew.installed('brew-cask')",
     "description": "Installs homebrew cask, which allows to install os x applications",
     "command": "brew install caskroom/cask/brew-cask"
   },
   "wget": {
     "required": ["homebrew"],
-    "check": "not homebrew.installed('wget')",
+    "check": "homebrew.installed('wget')",
     "description": "Installs wget",
     "command": "brew install wget"
+  },
+  "hoi-config": {
+    "file": ".gitignore",
+    "check": "file.contains('.hoi-data')",
+    "description": "Adds .hoi-data to .gitignore. .hoi-data contains step parameters",
+    "type": "file-manipulation",
+    "append": ".hoi-data"
   }
 }
